@@ -20,6 +20,7 @@ func TestNew(t *testing.T) {
 				server: &http.Server{},
 				addr:   PORT,
 				routes: map[string]route{},
+				ctx:    context.Background(),
 			},
 		},
 	}
@@ -51,6 +52,7 @@ func Test_router_ListenAndServe(t *testing.T) {
 			s.SetAddr(tt.addr)
 			s.SetStaticPath(tt.path)
 			s.SetStaticFolder(tt.folder)
+			s.SetContext(context.Background())
 			go func() {
 				time.Sleep(1 * time.Second)
 				_ = s.Shutdown(context.TODO())

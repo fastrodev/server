@@ -11,12 +11,14 @@ func New() *Server {
 		server: &http.Server{},
 		addr:   PORT,
 		routes: map[string]route{},
+		ctx:    context.Background(),
 	}
 }
 
 type Server struct {
 	server       *http.Server
 	routes       map[string]route
+	ctx          context.Context
 	addr         string
 	staticFolder string
 	staticPath   string
@@ -40,6 +42,11 @@ func (s *Server) newHandler(serverless bool) *handler {
 		staticFolder: s.staticFolder,
 		serverless:   serverless,
 	}
+}
+
+func (s *Server) SetContext(ctx context.Context) *Server {
+	s.ctx = ctx
+	return s
 }
 
 func (s *Server) SetAddr(addr string) *Server {
