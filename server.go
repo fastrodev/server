@@ -31,8 +31,8 @@ func (s *Server) ListenAndServe() error {
 	return s.server.ListenAndServe()
 }
 
-func (s *Server) Shutdown(ctx context.Context) error {
-	return s.server.Shutdown(ctx)
+func (s *Server) Shutdown() error {
+	return s.server.Shutdown(s.ctx)
 }
 
 func (s *Server) newHandler(serverless bool) *handler {

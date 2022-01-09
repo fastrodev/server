@@ -55,7 +55,7 @@ func Test_router_ListenAndServe(t *testing.T) {
 			s.SetContext(context.Background())
 			go func() {
 				time.Sleep(1 * time.Second)
-				_ = s.Shutdown(context.TODO())
+				_ = s.Shutdown()
 			}()
 			if err := s.ListenAndServe(); (err != nil) != tt.wantErr {
 				t.Errorf("router.ListenAndServe() error = %v, wantErr %v", err, tt.wantErr)
