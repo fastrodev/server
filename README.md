@@ -142,7 +142,7 @@ func postHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "User: %+v", u)
 }
 
-var putHandler = func(w http.ResponseWriter, r *http.Request) {
+func putHandler(w http.ResponseWriter, r *http.Request) {
 	type User struct {
 		Name string
 		Age  int
@@ -215,7 +215,7 @@ func postHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "User: %+v", u)
 }
 
-var putHandler = func(w http.ResponseWriter, r *http.Request) {
+func putHandler(w http.ResponseWriter, r *http.Request) {
 	type User struct {
 		Name string
 		Age  int
