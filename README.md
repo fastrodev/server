@@ -49,11 +49,12 @@ import (
 	"github.com/fastrodev/server"
 )
 
+func handler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Helo World")
+}
+
 func main() {
 	s := server.New()
-	func handler(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Helo World")
-	}
 	s.Get("/", handler)
 	log.Panic(s.ListenAndServe())
 }
@@ -72,16 +73,18 @@ import (
 	"github.com/fastrodev/server"
 )
 
+func handler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Helo World")
+}
+
+func middleware(w http.ResponseWriter, r *http.Request, next server.Next) {
+	dt := time.Now()
+	fmt.Println(dt)
+	next(w, r)
+}
+
 func main() {
 	s := server.New()
-	func handler(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Helo World")
-	}
-	func middleware(w http.ResponseWriter, r *http.Request, next server.Next) {
-		dt := time.Now()
-		fmt.Println(dt)
-		next(w, r)
-	}
 	s.Get("/", handler, middleware)
 	log.Panic(s.ListenAndServe())
 }
@@ -158,7 +161,7 @@ var putHandler = func(w http.ResponseWriter, r *http.Request) {
 ```
 
 ## Serverless
-You can deploy your codes to [google cloud function](https://cloud.google.com/functions). With this approach, you don't call the `Listen` function again. 
+You can deploy your codes to [google cloud function](https://cloud.google.com/functions). With this approach, you don't call the `ListenAndServe` function again. 
 ```go
 package function
 
